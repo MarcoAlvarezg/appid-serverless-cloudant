@@ -1,0 +1,447 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <link rel="shortcut icon" type="image/png" href="./images/Amb.png">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>&#60;Teacher Advocates&#62;</title>
+        <meta name="description" content="">
+        <meta name="author" content="">
+      
+        <!-- Favicons de intentet -->
+        <link rel="apple-touch-icon" href="./images/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="./imges/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="./imges/apple-touch-icon-114x114.png">
+      
+        <!-- Animaciones Bootstrap -->
+        <link rel="stylesheet" type="text/css" href="./css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.css">
+      
+        <!-- Estilos obtenidos de bootstrap-->
+        <link rel="stylesheet" type="text/css" href="./css/style.css">
+        <link rel="stylesheet" type="text/css" href="./css/prettyPhoto.css">
+        <!-- Funete de las letras-->
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,300' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,800,600,300' rel='stylesheet' type='text/css'>
+      </head>
+      
+      <body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+          <div style="background-color:   #5e9a6b">
+              <div class="logout">
+          <a href='/logout'><img class="logout-icon" href='/logout' id="logoutIcon"
+            src="images/logout.svg">Logout</a>
+        </div>
+      </div>
+        <!-- Header -->
+        <header id="header">
+          <div class="intro text-center">
+            <div class="overlay">
+              <div class="container">
+                <div class="row">
+                  <div class="intro-text">
+                    <h1 id="nombreEmb">Bienvenido:</h1>
+                    <p>&#60;Teacher advocate&#62;</p>
+                    <div data="user"><h2><p id="name"><span id="userName" ></span></p></h2></div>
+                      </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <!-- Navegacion o header de la pagina -->
+        <div id="nav">
+          <nav class="navbar navbar-custom">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse"> <i class="fa fa-bars"></i> </button>
+              </div>
+      
+              <!-- Animacion y movimineto del header -->
+              <div class="collapse navbar-collapse navbar-main-collapse">
+                <ul class="nav navbar-nav">
+                  <!--Hacer mas chica letra para que aparesca el encabezado en 1 linea-->
+                  <li class="hidden"> <a href="#page-top"></a> </li>
+                  <li> <a class="page-scroll" href="#page-top">Inicio</a> </li>
+                  <li> <a class="page-scroll" href="#page-top">Tu Perfil</a> </li>
+                  <li> <a class="page-scroll" href="#skills">Horas y Registro</a> </li>
+                  <li> <a class="page-scroll" href="#portfolio">Photo Gallery</a> </li>
+                  <li> <a class="page-scroll" href="#achievements">Ranking </a></li>
+                  <li> <a class="page-scroll" href="#testimonials">Live Feed</a> </li>
+                  <li> <a class="page-scroll" href="#contact">Recursos</a> </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div id="skills" class="text-center">
+          <div class="container">
+            <div class="section-title center">
+              <h2>Horas de voluntariado</h2>
+              <hr>
+            </div>
+            <div class="row">
+              <div class="progress">
+                <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" style="width:90%">
+                 <span id="horasReg"></span> hrs
+                </div>
+              </div>
+            </div>
+            <div class="section-title center">
+              <h2>Registro de Actividades</h2>
+              <hr>
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+              <form name="addActivity" id="addActivity" method="POST">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="hidden" id="user" name="user" value="" />
+                      <div class="item-required">
+                      <select class="form-control" id="actType" nonvalidate>
+                        <option selected="true" disabled>Tipo de actividad</option>
+                        <option>Clase o Conferencia</option>
+                        <option>Taller o Workshop</option>
+                        <option>Bootcamp o Diplomado</option>
+                      </select>
+                      <p class="help-block text-danger"></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="item-required">
+                      <input type="number" id="hours" class="form-control" min="0" max="100" placeholder="Cantidad de horas (sin minutos)" required>
+                      <p class="help-block text-danger"></p>
+                    </div></div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" id="loc" class="form-control" placeholder="Ubicación del evento" required>
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <input type="text" id="students" class="form-control" placeholder="Cantidad de alumnos participantes" required>
+                      <p class="help-block text-danger"></p>
+                    </div>
+                  </div>
+                  <!---->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="item-required">
+                      <select id="ins" class="form-control" required>
+
+                      </select>
+                      <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <textarea name="message" id="comment" class="form-control" rows="3" placeholder="Comentarios adicionales que quieras compartir" required></textarea>
+                  <p class="help-block text-danger"></p>
+                </div>
+                    <div class="form-group">
+                        <div class="star-rating"> 
+                            <h5>Califica tu experiencia</h5>
+                            <div class="rating">
+                              <input type="radio" id="star5" name="rating" onclick="handleClick(this);" value="5" class="radio-1" />
+                              <label for="star5" class="star star-1" title="Excellent"></label>
+                              <input type="radio" id="star4" name="rating" onclick="handleClick(this);" value="4" class="radio-2" />
+                              <label for="star4" class="star star-2" title="Great"></label>
+                              <input type="radio" id="star3" name="rating" onclick="handleClick(this);" value="3" class="radio-3" />
+                              <label for="star3" class="star star-3" title="Average"></label>
+                              <input type="radio" id="star2" name="rating" onclick="handleClick(this);" value="2" class="radio-4" />
+                              <label for="star2" class="star star-4" title="Poor"></label>
+                              <input type="radio" id="star1" name="rating" onclick="handleClick(this);" value="1" class="radio-5" />
+                              <label for="star1" class="star star-5" title="Bad"></label>
+                          </div>         
+                          <input type="hidden" id="rat" name="rat" value="" />
+                      </div>
+                  </div>
+                  <br><br><br>
+                <div id="success" class="alert">
+                <button type="submit" class="btn btn-default">Registrar Actividad</button>
+                </div>
+              </form>
+              <!--Redes Sociales de la pagina de IBM-->
+              <div>
+                <a href="https://teachadv99.mybluemix.net/"><input type="button" class="btn-default" value="Cargar Fotos"></a>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        </div>
+        <!-- Portfolio de evidencias de los eventos  -->
+        
+        <!-- Seccion de Ranking -->
+        <div id="achievements" class="text-center">
+          <div class="container">
+            <div class="section-title center">
+              <h2><strong>Ranking<strong></h2>
+              <hr>
+              <p><strong>Numero de actividades realizadas<strong></p>
+            </div>
+            <div class="row">
+                <h2>
+                  <div class = "col-sm-3"><span id="b6f5179410b0740e1ac3d2448324b7ff"></span></div>
+                  <div class = "col-sm-3"><span id="eee48a98b24647697ef1434ba78540b7"></span></div>
+                  <div class = "col-sm-3"><span id="1db6f8e24084e128c7816097e577c81d"></span></div>
+                  <div class = "col-sm-3"><span id="b73e36b9ec13b8e23856d0e997ef1739"></span></div>
+                </h2>
+              </div>
+              <div class="row">
+                <div class="skills">
+                  <div class="circular-progress UNAM"></div>
+                  <div class="circular-progress ITESM"></div>
+                  <div class="circular-progress IPN"></div>
+                  <div class="circular-progress UAM"></div>
+                </div>
+              </div>
+              <br>
+              <hr id="l1">
+              <br>
+              <br>
+              <div class="row">
+                  <h2>
+                    <div class = "col-sm-3"><span id="b5e04b4c196a15a5c0a8eea809e734a3"></span></div>
+                    <div class = "col-sm-3"><span id="fee9901d24e60449d5a367af25434419"></span></div>
+                    <div class = "col-sm-3"><span id="b73e36b9ec13b8e23856d0e997eddb8a"></span></div>
+                    <div class = "col-sm-3"><span id="7c4b4f6c182ba0dc751da372fec5a6fb"></span></div>
+                  </h2>
+                </div>
+              <div class="row">
+                <div class="skills">
+                    <div class="circular-progress TecNM"></div>
+                    <div class="circular-progress ITAM"></div>
+                    <div class="circular-progress UAEMex"></div>
+                    <div class="circular-progress UDG"></div>
+                </div>
+              </div>
+              <br>
+              <hr id="l1">
+              <br>
+              <br>
+                <div class="row">
+                    <h2>
+                      <div class = "col-sm-3"><span id="e911f59348207a40586d847bc37f9a74"></span></div>
+                      <div class = "col-sm-3"><span id="57e77eeb9087fac8c340f21eec1c9777"></span></div>
+                      <div class = "col-sm-3"><span id="7c4b4f6c182ba0dc751da372fec95879"></span></div>
+                      <div class = "col-sm-3"><span id="57e77eeb9087fac8c340f21eec21d3b5"></span></div>
+                    </h2>
+                  </div>
+                <div class="row">
+                  <div class="skills">
+                      <div class="circular-progress UANL"></div>
+                      <div class="circular-progress Anahuac"></div>
+                      <div class="circular-progress UNITEC"></div>
+                      <div class="circular-progress UVM"></div>
+                  </div>
+                  </div>
+                  <br>
+                <hr id="l1">
+                <br>
+                <br>
+          </div>
+        </div>
+        </div>
+        <!-- Testimonials Section -->
+        <div id="testimonials" class="text-center">
+          <div class="container">
+            <div class="section-title center">
+              <h2>Live Feed</h2>
+              <hr>
+            </div>
+            <div class="row">
+              <div class="col-md-10 col-md-offset-1">
+                <div class="row testimonials">
+                  <div class="col-sm-4">
+                      <p>
+                        <h3><strong>Si conoces de algún evento o quieres apoyar en alguna actividad, ¡Háznoslo saber aquí!</strong></h>
+                      </p>
+            <div class="columns">
+                <h3 class="title is-3">
+                  Mensajes de visitantes anteriores
+                </h3>
+                <div style="background : #000000;
+                  color : #ffffff;
+                  padding : 4px;
+                  width : 800px;
+                  height : 400px;
+                  overflow : auto; ">
+                <div id="entries"></div>
+                </div>
+              <div class="column">
+                <h3 class="title is-3">
+                  Agrega tu mensaje
+                </h3>
+                <form id="addEntry">
+                  <div class="field">
+                    <label class="label"></label>
+                    <div class="control">
+                      <input class="input" type="text" placeholder="Tu nombre" id="nombre">
+                    </div>
+                  </div>
+                  <div class="field">
+      <br>              <label class="label"></label>
+                    <div class="control">
+                      <input class="input" type="text" placeholder="Tu correo" id="correo">
+                    </div>
+                  </div>
+                  <div class="field">
+      <br>              <label class="label"></label>
+                    <div class="control">
+                      <textarea class="textarea" placeholder="Tu aportacion" id="comentario"></textarea>
+                    </div>
+                  </div>
+                  <div class="control">
+        <br>            <button class="button is-primary">Enviar mensaje</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Contact Section -->
+        <!--Necesito modificar la seccion de las imagens para que esten alineadas8-->
+        <div id="contact" class="text-center">
+          <div class="overlay">
+            <div class="container">
+              <div class="section-title center">
+                <h2>Recursos</h2>
+                <hr>
+              </div>
+              <div class="row">
+                <div class="portfolio-items">
+                  <div class="col-sm-6 col-md-3 col-lg-3 web">
+                    <div class="portfolio-item">
+                      <div class="hover-bg">
+                        <a href="https://ibm.box.com/s/j8en6g2okpjk952q0lpe9itjw89uhaim" title="Project description" rel="prettyPhoto">
+                          <div class="hover-text">
+                            <h4>Watson</h4>
+                          </div>
+                          <img src="../protected/images/categorias/IconWatson.png" class="img-responsive" alt="Project Title">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-3 col-lg-3 app">
+                    <div class="portfolio-item">
+                      <div class="hover-bg">
+                        <a href="https://ibm.box.com/s/u4ui47vpookrejw5z7wt8ifakag3ygas" title="Project description" rel="prettyPhoto">
+                          <div class="hover-text">
+                            <h4>Data Science</h4>
+                          </div>
+                          <img src="./images/categorias/IconData.png" class="img-responsive" alt="Project Title">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-3 col-lg-3 web">
+                    <div class="portfolio-item">
+                      <div class="hover-bg">
+                        <a href="https://ibm.box.com/s/mf9zhd4zyn3f4flkzc5innra6olysdpe" title="Project description" rel="prettyPhoto">
+                          <div class="hover-text">
+                            <h4>Cloud</h4>
+                          </div>
+                          <img src="./images/categorias/IconCloud.png" class="img-responsive" alt="Project Title">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6 col-md-3 col-lg-3 app">
+                    <div class="portfolio-item">
+                      <div class="hover-bg">
+                        <a href="https://ibm.box.com/s/q0mvuupz8y403008qkiz3qhdurp5erw8" title="Project description" rel="prettyPhoto">
+                          <div class="hover-text">
+                            <h4>Internet of Things</h4>
+                          </div>
+                          <img src="./images/categorias/IconIoT.png" class="img-responsive" alt="Project Title">
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+            </div>
+          </div>
+          <!-- Pie de pagina -->
+          <div id="footer">
+            <div class="container text-center">
+              <div class="fnav">
+                <p>Copyright &copy; 2018 Ambassador por <a href="https://www.ibm.com/mx-es/" rel="nofollow"> IBM México</a></p>
+              </div>
+            </div>
+          </div>
+          </div>
+          <script>
+              var currentValue = 0;
+              function handleClick(rating) {
+                currentValue = rating.value;
+                document.getElementById("rat").value = currentValue;
+              }
+          </script>
+          <!-- <script type="text/javascript" src="./javascript/jquery.1.11.1.js"></script> -->
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+        
+          <script type="text/javascript" src="./javascript/bootstrap.js"></script>
+          <!-- <script type="text/javascript" src="./javascript/SmoothScroll.js"></script> -->
+          <script type="text/javascript" src="./javascript/jquery.prettyPhoto.js"></script>
+          <!-- <script type="text/javascript" src="./javascript/jquery.isotope.js"></script> -->
+          <!-- <script type="text/javascript" src="./javascript/jquery.counterup.js"></script>
+          <script type="text/javascript" src="./javascript/easypiechart.js"></script> -->
+          <script type="text/javascript" src="./javascript/waypoints.js"></script>
+          <script type="text/javascript" src="./javascript/jqBootstrapValidation.js"></script>
+         
+          <script id="entries-template" type="text/x-handlebars-template">
+            {{#each entries}}
+            <div class="box">
+              <article class="media">
+                <div class="media">
+                  <figure class="image is-64x64">
+                    <br><img src="{{icon}}" alt="No Image">
+                  </figure>
+              <strong>{{nombre}}</strong> 
+              <br><strong>{{correo}}</strong>
+                     <br> {{comentario}}
+               </article>
+              </div>
+            </div>
+            {{/each}}
+          </script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+          <script src="./javascript/cloudant.js"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+          <script src="./javascript/guestbook.js"></script>
+          <!-- <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+          <script>
+            //para el nombre de usuario
+            var user;
+            $.getJSON('/protected/api/idPayload', function (id_token) {
+              $('#userName').html(id_token.name);
+              user = id_token.email;
+              document.getElementById("user").value = user;
+            });
+          </script>
+          <script>
+          //para las instituciones
+          let dropdown = $('#ins');
+          dropdown.empty();
+          dropdown.append('<option selected="true" disabled> Institucion </option>');
+          dropdown.prop('selectedIndex', 0);
+          $.getJSON('/protected/api/inst', function (data){
+            var h = data.docs;
+            $.each(h, function (key, entry){
+             dropdown.append(new Option(entry.nombre));
+            });
+          })
+          </script>
+          </body>
