@@ -1077,7 +1077,7 @@ h1 {
 
 .UNAM {
   background: linear-gradient(0deg, rgb(170, 159, 2) 50%, rgba(170, 159, 2, 0.2) 50%);
-  transform: rotate(126deg);
+  transform: rotate(0deg);
 }
 .UNAM:before, .UNAM:after {
   color: rgb(18, 37, 143);
@@ -1085,18 +1085,18 @@ h1 {
 .UNAM:before {
   content: "UNAM";
   background: rgb(151, 231, 255) content-box;
-  transform: rotate(-126deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .UNAM:after {
   content:"";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255)  50%);
-  transform: scale(1.1) rotate(-126deg);
+  transform: scale(1.1) rotate(0deg);
 }
 
 .ITESM {
   background: linear-gradient(0deg, rgb(0, 43, 233) 50%, rgba(0, 43, 233, 0.2) 50%);
-  transform: rotate(153deg);
+  transform: rotate(0deg);
 }
 .ITESM:before, .ITESM:after {
   color: rgb(0, 43, 233);
@@ -1104,18 +1104,18 @@ h1 {
 .ITESM:before {
   content: "ITESM";
   background: rgb(151, 231, 255)  content-box;
-  transform: rotate(-153deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .ITESM:after {
   content: "";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255) 50%);
-  transform: scale(1.1) rotate(-153deg);
+  transform: scale(1.1) rotate(0deg);
 }
 
 .IPN {
   background: linear-gradient(0deg, rgb(112, 0, 0) 50%, rgba(112, 0, 0, 0.2) 50%);
-  transform: rotate(102.6deg);
+  transform: rotate(0deg);
 }
 .IPN:before, .IPN:after {
   color: rgb(112, 0, 0);
@@ -1123,17 +1123,17 @@ h1 {
 .IPN:before {
   content: "IPN";
   background: rgb(151, 231, 255) content-box;
-  transform: rotate(-102.6deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .IPN:after {
   content: "";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255) 50%);
-  transform: scale(1.1) rotate(-102.6deg);
+  transform: scale(1.1) rotate(0deg);
 }
 .UAM {
   background: linear-gradient(0deg, black 50%, rgba(0, 0, 0, 0.2) 50%);
-  transform: rotate(126deg);
+  transform: rotate(0deg);
 }
 .UAM:before, .UAM:after {
   color: black;
@@ -1141,18 +1141,18 @@ h1 {
 .UAM:before {
   content: "UAM";
   background: rgb(151, 231, 255) content-box;
-  transform: rotate(-126deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .UAM:after {
   content:"";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255)  50%);
-  transform: scale(1.1) rotate(-126deg);
+  transform: scale(1.1) rotate(0deg);
 }
 
 .TecNM {
   background: linear-gradient(0deg, rgb(53, 107, 255) 50%, rgba(3, 107, 255, 0.2) 50%);
-  transform: rotate(153deg);
+  transform: rotate(0deg);
 }
 .TecNM:before, .TecNM:after {
   color: rgb(3, 107, 255);
@@ -1160,18 +1160,18 @@ h1 {
 .TecNM:before {
   content: "TecNM";
   background: rgb(151, 231, 255)  content-box;
-  transform: rotate(-153deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .TecNM:after {
   content: "";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255) 50%);
-  transform: scale(1.1) rotate(-153deg);
+  transform: scale(1.1) rotate(0deg);
 }
 
 .ITAM {
   background: linear-gradient(0deg, rgb(11, 88, 56) 50%, rgba(11, 88, 56, 0.2) 50%);
-  transform: rotate(102.6deg);
+  transform: rotate(0deg);
 }
 .ITAM:before, .ITAM:after {
   color: rgb(11, 88, 56);
@@ -1179,17 +1179,17 @@ h1 {
 .ITAM:before {
   content: "ITAM";
   background: rgb(151, 231, 255) content-box;
-  transform: rotate(-102.6deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .ITAM:after {
   content: "";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255) 50%);
-  transform: scale(1.1) rotate(-102.6deg);
+  transform: scale(1.1) rotate(0deg);
 }
 .UAEMex {
   background: linear-gradient(0deg, rgb(12, 100, 42) 50%, rgba(12, 100, 42, 0.2) 50%);
-  transform: rotate(126deg);
+  transform: rotate(0deg);
 }
 .UAEMex:before, .UAEMex:after {
   color: rgb(170, 159, 2);
@@ -1197,18 +1197,18 @@ h1 {
 .UAEMex:before {
   content: "UAEMex";
   background: rgb(151, 231, 255) content-box;
-  transform: rotate(-126deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .UAEMex:after {
   content:"";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255)  50%);
-  transform: scale(1.1) rotate(-126deg);
+  transform: scale(1.1) rotate(0deg);
 }
 
 .UDG {
   background: linear-gradient(0deg, rgb(179, 37, 37) 50%, rgba(179, 37, 37, 0.2) 50%);
-  transform: rotate(153deg);
+  transform: rotate(0deg);
 }
 .UDG:before, .UDG:after {
   color: rgb(0, 35, 133);
@@ -1216,18 +1216,18 @@ h1 {
 .UDG:before {
   content: "UDG";
   background: rgb(151, 231, 255)  content-box;
-  transform: rotate(-153deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .UDG:after {
   content: "";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255) 50%);
-  transform: scale(1.1) rotate(-153deg);
+  transform: scale(1.1) rotate(0deg);
 }
 
 .UANL {
   background: linear-gradient(0deg, rgb(0, 20, 196) 50%, rgba(0, 20, 196, 0.2) 50%);
-  transform: rotate(102.6deg);
+  transform: rotate(0deg);
 }
 .UANL:before, .UANL:after {
   color: rgb(201, 187, 0);
@@ -1235,17 +1235,17 @@ h1 {
 .UANL:before {
   content: "UANL";
   background: rgb(151, 231, 255) content-box;
-  transform: rotate(-102.6deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .UANL:after {
   content: "";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255) 50%);
-  transform: scale(1.1) rotate(-102.6deg);
+  transform: scale(1.1) rotate(0deg);
 }
 .Anahuac {
   background: linear-gradient(0deg, rgb(255, 145, 0) 50%, rgba(255, 145, 0, 0.2) 50%);
-  transform: rotate(126deg);
+  transform: rotate(0deg);
 }
 .Anahuac:before, .Anahuac:after {
   color: rgb(109, 60, 34);
@@ -1253,18 +1253,18 @@ h1 {
 .Anahuac:before {
   content: "Anáhuac";
   background: rgb(151, 231, 255) content-box;
-  transform: rotate(-126deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .Anahuac:after {
   content:"";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255)  50%);
-  transform: scale(1.1) rotate(-126deg);
+  transform: scale(1.1) rotate(0deg);
 }
 
 .UNITEC {
   background: linear-gradient(0deg, steelblue 50%, rgba(70, 130, 180, 0.2) 50%);
-  transform: rotate(153deg);
+  transform: rotate(0deg);
 }
 .UNITEC:before, .UNITEC:after {
   color: steelblue;
@@ -1272,18 +1272,18 @@ h1 {
 .UNITEC:before {
   content: "UNITEC";
   background: rgb(151, 231, 255)  content-box;
-  transform: rotate(-153deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .UNITEC:after {
   content: "";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255) 50%);
-  transform: scale(1.1) rotate(-153deg);
+  transform: scale(1.1) rotate(0deg);
 }
 
 .UVM {
   background: linear-gradient(0deg, rgb(184, 6, 0) 50%, rgba(184, 6, 0, 0.2) 50%);
-  transform: rotate(102.6deg);
+  transform: rotate(0deg);
 }
 .UVM:before, .UVM:after {
   color: black;
@@ -1291,13 +1291,13 @@ h1 {
 .UVM:before {
   content: "UVM";
   background: rgb(151, 231, 255) content-box;
-  transform: rotate(-102.6deg);
+  transform: rotate(0deg);
   text-transform: uppercase;
 }
 .UVM:after {
   content: "";
   background: linear-gradient(transparent 50%, rgb(151, 231, 255) 50%);
-  transform: scale(1.1) rotate(-102.6deg);
+  transform: scale(1.1) rotate(0deg);
 }
 .skills {
   display: flex;

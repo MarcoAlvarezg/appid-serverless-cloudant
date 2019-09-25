@@ -2,8 +2,8 @@
  * Web application
  */
 var Url = "https://86c1ea06.us-south.apiconnect.appdomain.cloud/guestbook";
-var UrlU = "https://localhost:3000/protected/api/idPayload";
-var UrlI = "https://localhost:3000/protected/api/inst";
+var UrlU = "http://localhost:3000/protected/api/idPayload";
+var UrlI = "http://localhost:3000/protected/api/inst";
 //fs file open
 
 
@@ -90,7 +90,7 @@ var x;
 var i;
 var h;
 var eh;
-
+var n=0;
 (function() {
 
   let entriesTemplate;
@@ -113,6 +113,7 @@ var eh;
         return;
       }
       i = res.docs;
+      //console.log(i); 
     });
     cloudantConnection.get().done(function(result) {
       if (!result.entries) {
@@ -121,7 +122,6 @@ var eh;
       var arr = result.entries;
       //console.log(arr);
       //console.log(x);
-      //console.log(i); 
       // Hacer un $.each sobre el arreglo de instituciones
       // para cada elemento, vas a aplicar un .filter() al results.entries
       // referencia: https://www.w3schools.com/jsref/jsref_filter.asp
@@ -151,7 +151,11 @@ var eh;
           })
         var totalEH = eh.reduce((sum, value) => (typeof value.hours == "number" ? sum + value.hours : sum), 0);
         //console.log(entry._id + " = " + totalEH +"h");
-        $("#"+entry._id).html(totalEH+" / 1000");       
+        $("#"+entry._id).html(totalEH+" / 1000");   
+        
+        var k =document.getElementById(entry._rev);
+        n=(totalEH/40)*180;
+        k.style.background="linear-gradient("+n+"deg, rgb(0, 0, 255) 50%, rgba(0, 0, 0, 0.2) 50%)";
         })
       }
       );
