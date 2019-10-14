@@ -21,7 +21,7 @@ const USER = {
 // crear variables de ambiente que almacenas el HOST_BACKEND
 // y la consumes con processs.env.HOST_BACKEND
 // puedes usar IBMcloudenv o el https://www.npmjs.com/package/dotenv
-
+//retrieve the existing universities entries
 const INST = {
   get(){
     return $.ajax({
@@ -33,7 +33,7 @@ const INST = {
 }
 
 const cloudantConnection = {
-  // retrieve the existing guestbook entries
+  // retrieve the existing activitis entries
   get() {
     return $.ajax({
       type: 'GET',
@@ -41,14 +41,9 @@ const cloudantConnection = {
       dataType: 'json'
     });
   },
-  // add a single guestbook entry
+  // add a single activity entry
   add(user, actType, hours, loc, students, ins, raiting, comment) {
-    /* actType = "a"
-     hours ="a"
-     loc ="a"
-     students ="a"
-     raiting="a"
-     comment="a" */
+    
     console.log('Sending', user, actType, hours, loc, students, ins, raiting, comment)
     return fetch(`${Url}/entries`,{
         method: "POST",
@@ -65,27 +60,7 @@ const cloudantConnection = {
           headers: {
             'Content-Type': 'application/json'
           }
-     })//.then(res => res.json())
-    // .catch(error => console.error('Error:', error))
-    // .then(response => console.log('Success:', response));
-    // return $.ajax({
-    //   type: 'POST',
-    //   url: `${Url}/entries`,
-    //  /* auth:{
-    //     username: '878522d7-3ae4-4aa6-8e0a-426463ef2478', 
-    //     password: 'nfjt22PuDGPJ3b2EnYWD8pS2GnEg7fWBDZ9jU0DmjUecrNDrj2h7chM11SafCG1h'
-    //   },*/
-    //   ContentType: 'application/json; charset=utf-8',
-    //   data: JSON.stringify({
-    //     actType,
-    //     hours,
-    //     loc,
-    //     students,
-    //     rating: raiting,
-    //     comment
-    //   }),
-    //   dataType: 'json',
-    // });
+     })
   }
 };
 var x;
@@ -111,40 +86,25 @@ var n=0;
       });
     INST.get().done(function(res){
       if(!res){
-        //console.log("nada por aqui");
         return;
       }
       i = res.docs;
-      //console.log(i); 
     });
     cloudantConnection.get().done(function(result) {
       if (!result.entries) {
         return;
       }
       var arr = result.entries;
-      //console.log(arr);
-      //console.log(x);
-      // Hacer un $.each sobre el arreglo de instituciones
-      // para cada elemento, vas a aplicar un .filter() al results.entries
-      // referencia: https://www.w3schools.com/jsref/jsref_filter.asp
-      // filter te regreesa un nuevo arreglo con el resultado del filtro
-      // a cada arreglo, le aplicas un .reduce y el resultado lo puedes
-      // hacer push() a un arreglo de resultados
-      //para horas del usuario
+      
       $.each(arr, function(key, entry){
-       // console.log(entry);
         function checkU(entry){
           return entry.name==x;
         }
         h = arr.filter(checkU);
         })
-        //console.log(h);
         var totalH = h.reduce((sum, value) => (typeof value.hours == "number" ? sum + value.hours : sum), 0);
-        //console.log(totalH + " horas");
         $("#horasReg").html(totalH);
-        //para horas de las instituciones i para inst arr para todo el arreglo
         $.each(i, function(key, entry){
-          //console.log(entry.nombre);
           $.each(arr, function(k,e){
             function checkI(e){
               return e.institucion==entry.nombre;
@@ -152,7 +112,6 @@ var n=0;
             eh = arr.filter(checkI);
           })
         var totalEH = eh.reduce((sum, value) => (typeof value.hours == "number" ? sum + value.hours : sum), 0);
-        //console.log(entry._id + " = " + totalEH +"h");
         $("#"+entry._id).html(totalEH+" / 1000");   
         
         var k =document.getElementById(entry._rev);
