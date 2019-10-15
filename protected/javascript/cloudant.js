@@ -65,7 +65,7 @@ const cloudantConnection = {
 };
 var x;
 var i;
-var h;
+var h=0;
 var eh;
 var n=0;
 (function() {
@@ -112,7 +112,7 @@ var n=0;
             eh = arr.filter(checkI);
           })
         var totalEH = eh.reduce((sum, value) => (typeof value.hours == "number" ? sum + value.hours : sum), 0);
-        $("#"+entry._id).html(totalEH+" / 1000");   
+        $("#"+entry._id).html(totalEH+" / 100");   
         
         var k =document.getElementById(entry._rev);
         n=(totalEH/40)*180;
