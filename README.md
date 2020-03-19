@@ -1,184 +1,436 @@
-# IBM Cloud App ID
-Node Sample Template App for the IBM Cloud App ID service. The App ID Dashboard overwrites the manifest.yml and localdev-config.json files with the user's information when they download a Node sample app. When downloaded, you can either run the application locally or in IBM Cloud.
 
+## IBM Developer Advocates Team
 [![IBM Cloud powered][img-ibmcloud-powered]][url-ibmcloud]
-[![Node Badge][img-node-badge]][url-node-badge]
-[![Travis][img-travis-master]][url-travis-master]
-[![Coveralls][img-coveralls-master]][url-coveralls-master]
-[![Codacy][img-codacy]][url-codacy]
 
-[![GithubWatch][img-github-watchers]][url-github-watchers]
-[![GithubStars][img-github-stars]][url-github-stars]
-[![GithubForks][img-github-forks]][url-github-forks]
+# Functions de IBM Cloud 
+[Functions](#Functions)
+Plataforma de IBM cloud de programacion poliglota FaaS (Functions-as-a-Service) para desarrollo de codigo ligero que escala dependiendo de la demanda.
 
-## Table of Contents
-* [Contents](#contents)
-* [Requirements](#requirements)
-* [Running Locally](#running-locally)
-* [Running in IBM Cloud](#running-in-ibm-cloud)
-* [Clarification](#clarification)
-* [License](#license)
+GitHub de Serverless para desplegar con githubpages: [![Serverless][img-cloud-serverless]][url-githubserverless]
 
-## Contents
+Para mayor informacion: [![Functions][img-cloud-functions]][url-ibmcloud-Functions]
 
-`app.js`  Uses Express to set the routes.
+# IBM Cloud App ID 
+[AppId](#Appid)
+Servicio de IBM cloud que de manera sencilla agrega autentificacion, asegura backends y APIs, y gestiona datos de usuarios especificos en una aplicacion web y movil.
 
-`public/index.html`  The application landing page. Click **Login** to start.
+Para mayor informacion: [![App-id][img-cloud-appid]][url-ibmcloud-appid]
 
-`protected/protected.html`  The application's protected page. After clicking the **Login** button, the user is redirected here. This is where
-we check whether the user is authorized or not. In the case where the user is not authorized, we send a request to the
-authentication server to start the OAuth flow. If the user is authorized, we show the protected data.
+# IBM Cloudant
+Es una base de datos completamente administrable para aplicaciones multinube hibrida con una completa compatibilidad de API.
 
-## Requirements
-* Node 6.0.0 or higher
+Para mayor informacion: [![Cloudant][img-cloud-cloudant]][url-ibmcloud-cloudant]
 
-## Running Locally
+## Prework:
+* Cuenta de [IBM Cloud][url-IBMCLOUD]
+* Instalar [CLI de IBM Cloud][url-CLI-IBMCLOUD] 
+* Cuenta en [GitHub][url-github-join]
+* Instalar [CLI de GitHub][url-github-cli] o instalar [GitHub Desktop][url-githubdesktop]
+* [NodeJS][url-node]
+* Utilizar safari, chrome, firefox, edge
 
-Run the following commands:
-```bash
+### Cupones para Estudiantes y profesores
+ 
+
+	1.	Acceder al HUB para Software para uso académico. Y navegar hasta la parte de abajo de la pagina https://onthehub.com/ibm/?utm_sourc=ibm-ai-productpage&utm_medium=onthehubproductpage&utm_campaign=IBM 
+	2.	Buscar el WebStore del instituto/escuela al que perteneces. 
+	3.	En caso de no contar con WebStore, acceder al portal de IBM Academic Initiative y seleccionar la opción de <Students> 
+	4.	Seleccionar <Add to Cart> para IBM Bluemix – 6 Month Trial. 
+	5.	Realizar el registro correspondiente utilizando la cuenta de correo académica 
+ 
+### Cargar créditos en IBM Cloud
+	1.	Ingresamos a nuestro panel de control de IBM Cloud (cloud.ibm.com)
+	2.	Una vez que tengamos el código nos vamos a Gestionar>Facturación y Uso>Facturación
+	3.	Buscamos “Códigos de características (Promocionales)”
+
+
+## Contenido
+
+`app.js`  Usa Express para establecer rutas.
+
+`public/index.html`  La pagina de destino de la aplicacion. Hacer click en **Iniciar sesion** para iniciar.
+
+`protected/protected.html`  La pagina protegida de la aplicacion. Despues de hacer click en el boton de **Iniciar sesion**, el usuario es redrigido aqui. Aqui es donde se revisa si el usuario esta autorizado o no. En el caso en el que el usuario no este autorizado, se envia una solicitud al servidor de autenticacion para iniciar el flow de el OAuth. Si el usuario esta autorizado, se muestra la pagina y la informacion protegida.
+
+
+# Cloudant
+En esta seccion iniciaremos un servicio de Base de Datos no relacional.
+1. Buscaremos en nuestro catalogo **Cloudant**.
+2. Seleccionaremos el Plan **Lite**, le asignamos un nombre y en los metodos de autentificacion seleccionamos **Use both legacy credentials and IAM** y creamos el servicio.
+3. Ya que el servicio este suministrado, ingresamos al servicio y guardamos las credenciales del servicio para usarlas mas tarde. Estas se encuentran en la parte izquierda en la pestaña credenciales del servicio.
+4. Damos click en **Launch Cloudant Dashboard** en la pestaña de gestionar para que nos abra una pestaña nueva donde podremos ver nuestra base de datos, podemos tener mas de una base de datos con difernete nombre dentro del servicio.
+5. Crearemos una base de datos nueva en el apartado superior derecho **Create Database**, crearemos 3 que son:
+    1. guestbook: Donde guardaremos los comentarios en vivo
+    2. institucion: Donde cargaremos una lista que es parte de el Registro de Actividades
+    3. teach_adv: Donde se guardaran las actividades
+
+# Functions
+
+## Configuración de Functions
+**Comentarios en Vivo**
+![LIVEFEED](/docs/LIVEFEED.png)
+En esta sección configuraremos nuestra plataforma de IBM Cloud Functions.
+1. Secuencia de acciones para escribir a la base de datos
+	1. Vamos al catálogo y buscamos Cloud Functions
+ 	2. Una vez dentro seleccionamos Actions
+	3. Damos click en Create
+	4. Damos click en Create action
+	5. Ponemos el nombre prepare-entry-for-save y seleccionamos Node.js 10 como el Runtime, damos click en Create
+	6. Cambiamos el código por el siguiente:
+		``` js
+		function main(params) {
+		 if (!params.nombre || !params.comentario) {
+		  return Promise.reject({ error: 'no nombre o comentario'});
+		  }
+		 return {
+		  doc: {
+		   createdAt: new Date(),
+		   nombre: params.nombre,
+		   correo: params.correo,
+		   comentario: params.comentario
+		  }
+		 };
+	 	}
+		```
+	7. Lo salvamos
+	8. Para añadir nuestra acción a una secuencia primero nos vamos al tab “Enclosing Secuences” y damos click en “Add to Sequence”
+ 	9.	Para el nombre de la secuencia ponemos save-guestbook-entry-sequence y posteriormente damos click en Create and Add
+	10.	Una vez que esta creada nuestra secuencia le damos click y damos click en Add posteriormente
+ 	11.	Damos click en Use Public y seleccionamos Cloudant
+ 	12.	Seleccionamos la acción "creare-document", damos click en New Binding, en "name" ponemos de nombre de nuestro paquete binding-for-guestbook y en Cloudant Instance seleccionamos Input Your Own Credentials
+ 	13.	 Para llenar todos los datos posteriores copiamos y pegamos lo que teníamos en el servicio de Cloudant que seria "Username", "Password", "Host", y llenamos "Database" con el nombre que tiene nuestra base de datos "guestbook" y damos click en Add, luego en Save
+ 	14.	Para probar que esté funcionando, damos click en change input e ingresamos nuestro siguiente JSON y damos click en Apply y luego en Invoke
+	 ``` json
+		{
+		"nombre": "John Smith",
+		"correo": "john@smith.com",
+		"comentario": "Este es mi comentario"
+		}
+	```
+	Una vez hecho esto debemos verlo escrito en nuestra base de datos de Cloudant en la sección Documents
+ 
+2. Secuencia de acciones para obtener las entradas de la base de datos
+Esta secuencia la usaremos para tomar las entradas de cada usuario y sus respectivos comentarios
+	1.	En nuestra tab de functions creamos una acción Node.js 10 y le ponemos el nombre set-read-input, siguiendo el mismo proceso que en la acción anterior
+	2.	Reemplazamos el código que viene, esta acción pasa los parámetros apropiados a nuestra siguiente acción
+		``` js
+		function main(params) {
+		 return {
+		  params: {
+		   include_docs: true
+		   }
+		 };
+		}
+		```
+	3. Damos click en Save 
+	4. Damos click en Enclosing Sequences, Add to Sequence y Create New con el nombre read-guestbook-entries-sequence damos click en Create and Add
+	5. Damos click en Actions y  damos click en read-guestbook-entries-sequence
+ 	6. Damos click en Add para crear una segunda acción en la secuencia
+	7. Seleccionamos Public y Cloudant
+ 	8.	Seleccionamos list-documents en actions y seleccionamos el binding binding-for-guestbook y posteriormente damos click en Add
+ 	9.	Damos click en Add para añadir una acción más a la secuencia, esta es la que va a dar el formato de los documentos cuando regresen de Cloudant
+	10.	La nombraremos format-entries y posteriormente damos click en Create and add 
+	11.	Damos click en format-entries y reemplazamos el código con:
+		``` js
+		const md5 = require('spark-md5');
+			
+		function main(params) {
+		 return {
+		  entries: params.rows.map((row) => { return {
+		   nombre: row.doc.nombre,
+		   correo: row.doc.correo,
+		   comentario: row.doc.comentario,
+		   createdAt: row.doc.createdAt,
+		   icon: (row.doc.correo ? `https://secure.gravatar.com/avatar/${md5.hash(row.doc.correo.trim().toLowerCase())}?s=64` : null)
+		  }})
+		 };
+		}
+		```
+	12.	Salvamos y damos click en invoke, debe sacar lo que tenemos en esa base de datos.
+ 
+3. Configurar el API
+    1.	Dentro de nuestras acciones seleccionamos ambas secuencias y en la tab de Endpoints damos click en Enable Web Action y damos click en Save
+    
+    2.	Nos vamos a Functions y damos click en API
+    
+    3.	Damos click en Create Managed API
+    4.	En el API name ponemos guestbook y en el path ponemos /guestbook y damos click en create operation
+    
+    5.	Creamos un path que sea /entries ponemos el verbo a GET y seleccionamos la secuencia read-guestbook-entries-sequence y damos click en Create
+    
+    6.	Realizamos la misma acción pero ahora con un POST y la secuencia save-guestbook-entries-sequence y damos click en Create
+    7.	Salvamos y exponemos la API
+    8. Copiamos el link expuesto y lo cambiamo en ./protected/javascript/guestbook.js
+        ``` js
+        const apiUrl = '<url-api-functions>';
+        ```
+        en la linea 4
+        ![link](/docs/ApiGuestbook.png)
+
+**Para el registro de Actividades**
+![LIVEFEED](/docs/Actividades.png)
+1. Secuencia de acciones para escribir a la base de datos
+	1. Regresamos a IBM Cloud Functions
+ 	2. Seleccionamos Actions
+    3. Damos click en Create
+	4. Damos click en Create action
+	5. Ponemos el nombre prepare-entry y seleccionamos Node.js 10 como el Runtime, damos click en Create
+	6. Cambiamos el código por el siguiente:
+		``` js
+		function main(params) {
+            console.log(params)
+            return {
+                doc: {
+                    createdAt: new Date(),
+                    user: params.user,
+                    activityType: params.actType,
+                    hours: parseInt(params.hours),
+                    location: params.loc,
+                    students: params.students,
+                    institucion: params.ins,
+                    rating: params.rating,
+                    comments: params.comment
+                }
+            };
+        }
+		```
+	7. Lo salvamos
+	8. Añadimos nuestra acción a una secuencia con la tab “Enclosing Secuences” y damos click en “Add to Sequence”
+ 	9.	Para el nombre de la secuencia ponemos save-entry y posteriormente damos click en Create and Add
+	10.	Una vez que esta creada nuestra secuencia le damos click y damos click en Add posteriormente
+ 	11.	Damos click en Use Public y seleccionamos Cloudant
+ 	12.	Seleccionamos la acción "creare-document", damos click en New Binding, en "name" ponemos de nombre de nuestro paquete binding-for-Activities y en Cloudant Instance seleccionamos Input Your Own Credentials
+ 	13.	 Para llenar todos los datos posteriores copiamos y pegamos lo que teníamos en el servicio de Cloudant que seria "Username", "Password", "Host", y llenamos "Database" con el nombre que tiene nuestra base de datos "teach_adv" y damos click en Add, luego en Save
+ 	14.	Para probar que esté funcionando, damos click en change input e ingresamos nuestro siguiente JSON y damos click en Apply y luego en Invoke
+	 ``` json
+		{
+		"user": "john@smith.com",
+        "actType": "Taller o Workshop",
+        "hours": "3",
+        "loc": "pach",
+        "students": "10",
+        "ins": "Universidad",
+        "rating": "4",
+        "comment": "Todo bien"
+		}
+	```
+	Una vez hecho esto debemos verlo escrito en nuestra base de datos de Cloudant en la sección Documents
+ 
+2. Secuencia de acciones para obtener las entradas de la base de datos
+Esta secuencia la usaremos para tomar las entradas de cada usuario y sus respectivos comentarios
+	1.	En nuestra tab de functions creamos una acción Node.js 10 y le ponemos el nombre set-read, siguiendo el mismo proceso que en la acción anterior
+	2.	Reemplazamos el código que viene, esta acción pasa los parámetros apropiados a nuestra siguiente acción
+		``` js
+		function main(params) {
+		 return {
+		  params: {
+		   include_docs: true
+		   }
+		 };
+		}
+		```
+	3. Damos click en Save 
+	4. Damos click en Enclosing Sequences, Add to Sequence y Create New con el nombre read-guestbook-entries-sequence damos click en Create and Add
+	5. Damos click en Actions y  damos click en read-entries
+ 	6. Damos click en Add para crear una segunda acción en la secuencia
+	7. Seleccionamos Public y Cloudant
+ 	8.	Seleccionamos list-documents en actions y seleccionamos el binding binding-for-Activities y posteriormente damos click en Add
+ 	9.	Damos click en Add para añadir una acción más a la secuencia, esta es la que va a dar el formato de los documentos cuando regresen de Cloudant
+	10.	La nombraremos format y posteriormente damos click en Create and add 
+	11.	Damos click en format y reemplazamos el código con:
+		``` js
+		const md5 = require('spark-md5');
+			
+		function main(params) {
+		 return {
+		  entries: params.rows.map((row) => { return {
+            name: row.doc.user,
+            hours: row.doc.hours,
+            institucion: row.doc.institucion,}})
+		 };
+		}
+		```
+	12.	Salvamos y damos click en invoke, debe sacar lo que tenemos en esa base de datos.
+ 
+3. Configurar el API
+    1.	Dentro de nuestras acciones seleccionamos ambas secuencias y en la tab de Endpoints damos click en Enable Web Action y damos click en Save
+    
+    2.	Nos vamos a Functions y damos click en API
+    
+    3.	Damos click en Create Managed API
+    4.	En el API name ponemos teachADV y en el path ponemos /entries y damos click en create operation
+    
+    5.	Creamos un path que sea /entries ponemos el verbo a GET y seleccionamos la secuencia read-entries y damos click en Create
+    
+    6.	Realizamos la misma acción pero ahora con un POST y la secuencia save-entries y damos click en Create
+    7.	Salvamos y exponemos la API
+    8. Copiamos el link expuesto y lo cambiamo en ./protected/javascript/cloudant.js
+        ``` js
+        const apiUrl = '<url-api-functions>';
+        ```
+        en la linea 4
+
+
+    
+
+# AppId
+
+## Tabla de Contenidos
+* [Contenido](#Contenido)
+* [Configuracion del Servicio](#Configuracion-del-Servicio)
+* [Ejecucion local](#Ejecucion-local)
+* [Ejecucion en IBM Cloud](#Ejecucion-en-IBM-cloud)
+* [Licencia](#Licencia)
+
+<!-- (falta agregar configuraciones de appid en esta parte) -->
+
+## Configuracion del Servicio
+
+1. En IBM Cloud en el catalogo buscamos **App ID** y le damos click.
+2. Asignamos la Region mas cercana, nombre del servicio, etiquetas y la version **Lite**, le damos click a crear.
+
+![](/docs/Region-plan.png)
+
+![](/docs/name-create.png)
+
+3. Nos llevará a la pagina principal del Servicio, donde encontraremos de lado derecho la lista de opciones del servicio.
+	Nos dirigiremos a "Manage Authentication" y en el apartado de "Identity Providers" para asignar como los usuarios pueden crear su cuenta. Se puede elegir entre las siguientes:
+
+	![](/docs/cuentas.png)
+
+4. En la otra pestaña "Authentification Settings" podemos agregar URL para la redireccion de nuestra aplicacion. Los tokns de seguridad para mantenerse con la sesion iniciada, con el codigo de acceso y el codigo de la cuenta anonima si es que esta activo. 
+
+	![](/docs/token.png)
+
+5. En "Cloud Directory" debajo de "Manage Authentication" encontraremos diversas opciones, seleccionaremos "Workflow Templates" en "Email Verification" se puede cambiar el correo que llega para la verificación del mismo y permitir si los usuarios pueden ingresar a la parte protegida o no si la cuenta ya esta verificada.
+
+	![](/docs/email.png)
+
+6. En la opcion de "Login Customization" podemos cambiar ligeramente la pantalla en donde se inicia sesion, se puede modificar el logo que puede ser png o jpg no mayor a 100kb, el color del encabezado, y tenemos una vista previa en web y movil.
+
+	![](/docs/login.png)
+
+7. En la pestaña de "Applications" podremos agregar nuestra aplicacion con el boton **Add application** donde nos arrojara una ventana para asignar nombre, tipo, y por si queremos agregar un "Scope". Asiganmos nombre y lo dejaremos como **Regular web application**.
+
+	![](/docs/conection.png)
+
+8. Eso nos dara unas credenciales que usaremos en nuestra aplicacion. Las cambiaremos en el archivo llamado "**localdev-congfig.json**" 
+
+	![](/docs/credentials.png)	
+
+
+
+# Ejecucion local
+
+Primero regresamos a "Authentification Settings" donde ingresamos en el punto 4 de la configuración, para agregar la URL "http://localhost:3000/*
+
+Ejecuta los siguientes comandos en la terminal, en la carpeta clonada:
+``` bash
 npm install
-npm start
+node app
 ```
-Use the link http://localhost:3000 to load the web application in browser.
+Usa el link http://localhost:3000 para cargar la aplicacion web en el navegador.
 
-## Running in Cloud Foundry
+# Ejecucion en IBM Cloud
 
-### Prerequisites
-Before you begin, make sure that IBM Cloud CLI is installed.
-For more information visit: https://cloud.ibm.com/docs/cli?topic=cloud-cli-getting-started.
+**IMPORTANTE:** Antes de desplegarlo de manera global, quite "http://localhost:3000/*" de la lista de URLs de redirección WEB en "Manage Authentication" en la pestaña "Authentication Settings".
 
-### Deployment
+1. Iniciar sesión en IBM Cloud CLI.
+	``` bash
+	ibmcloud login 
+	```
 
-**Important:** Before going live, remove http://localhost:3000/* from the list of web redirect URLs located in "Manage Authentication" -> "Authentication Settings" page in the AppID dashboard.
+	1. Elegimos la Region, que sea la mas cercana, como us-south o us-east.
 
-1. Login to IBM Cloud.
+	![](/docs/Region.png)
 
-  `ibmcloud login -a https://api.{{domain}}`
+2. Seleccionar una organización y un espacio de Cloud Foundry en el cual tengas acceso de desarrollador:
+	<br>Utiliza:
 
-2. Target a Cloud Foundry organization and space in which you have at least Developer role access:
+	``` bash
+	ibmcloud target --cf
+	```
 
-  Use `ibmcloud target --cf` to target Cloud Foundry org/space interactively.
+	para seleccionar la org/space interactivamente de Cloud Foundry.
 
-3. Bind the sample app to the instance of App ID:
+	1. Revisar que tengamos tambien seleccionado el grupo de recursos, si no, utilizaremos:
+		``` bash
+		ibmcloud resource groups
+		```
 
-  `ibmcloud resource service-alias-create "appIDInstanceName-alias" --instance-name "appIDInstanceName" -s {{space}}`
-  
-4. Add the alias to the manifest.yml file in the sample app.
+		para que nos muestre los que tenemos disponibles y seleccionamos uno con:
+
+		``` bash
+		ibmcloud target -g {{el nombre del recurso}}
+		```
+	
+3. Enlazamos la app a la instancia de App ID:
+
+	``` bash
+	ibmcloud resource service-alias-create "{{El nombre Alias de la instancia}}" --instance-name "{{El nombre del servicio ya creada en IBM Cloud}}" -s {{space}}
+	```
+
+	Nos creara una instancia de Cloud Foundry conectada a nuestro servicio de AppID.
+
+	![](/docs/Servicio.png)
+
+4. Cambiaremos el nombre del Alias de la instancia en el archivo manifest.yml
 
    ```
    applications:
-        - name: [app-instance-name]
+        - name: [el nombre de la app]
         memory: 256M
         services:
-        - appIDInstanceName-alias
+        - {{El nombre Alias de la instancia}}
    ```
 
-5. Deploy the sample application to IBM Cloud. From the app's folder do:
+5.  Desplegamos la aplicacion directamente en IBM Cloud, desde la carpeta de la app ejecutamos:
 
-  `ibmcloud app push`
-  
-6. Now configure the OAuth redirect URL at the App ID dashboard so it will approve redirecting to your cluster. Go to your App ID instance at [IBM Cloud console](https://cloud.ibm.com/resources) and under Manage Authentication->Authentication Settings->Add web redirect URLs add the following URL:
+  ```bash
+  ibmcloud app push
+  ```
 
-   `https://{App Domain}/ibm/cloud/appid/callback`
+ Nos entregara algo como esto:
+
+ ![](/docs/Ruta.png)
+
+Cambiamos las rutas que se encuentran en  ./protected/javascript/cloudant.js en las lineas 5 y 6, por: `https://{la ruta que copiamos}/protected/api/idPayload` y `https://{la ruta que copiamos}/protected/api/inst`.
+
+6. Ahora configuraremos la URL de redirection de OAuth en nuestro servicio de AppID en para que pueda aprobar el acceso. Copiamos la routa que nos dio el paso anterio en la parte `routes: *********.mybluemix.net`. 
+
+Nos dirigimos a nuestro servicio de AppID. En **Manage Authentication** despues en **Authenticaiton Settings** veremos un boton que dice de + que es que nos permitira agregar una URL nueva, que sera la siguiente:
+
+![](/docs/RutaNueva.png)
+
+   `https://{la ruta que copiamos}/ibm/cloud/appid/callback`
    
-   You find your app's domain by visiting Cloud Foundry Apps at the IBM Cloud dashboard: https://cloud.ibm.com/resources.
+   Ahora podemos encontrar nuestra app en **Cloud Foundre Apps** en la pagina inicial de IBM Cloud: `https://cloud.ibm.com/resources`
 
-7. Open your IBM Cloud app route in the browser.
+7. Al entrar veremos un botón que nos permitira visitar la URL de la app.
 
-## Running in Kubernetes
+![](/docs/visita.png)
 
-### Prerequisites
-Before you begin make sure that IBM Cloud CLI, docker and kubectl installed and that you have a running kubernetes cluster.
-You also need an IBM Cloud container registry namespace (see https://cloud.ibm.com/kubernetes/registry/main/start). You can find your registry domain and repository namespace using `ibmcloud cr namespaces`.
+## Puedes ver mas en:
+#### Protegiendo applicaciones Web Node.js con IBM Cloud App ID
 
-### Deployment
-
-**Important:** Before going live, remove http://localhost:3000/* from the list of web redirect URLs located in "Manage Authentication" -> "Authentication Settings" page in the AppID dashboard.
-
-**Note:** Your App ID instance name must consist of lower case alphanumeric characters, '-' or '.', and must start and end with an alphanumeric character. You can visit the App ID dashboard to change your instance name. 
-
-1. Login to IBM Cloud.
-
-    `ibmcloud login -a https://api.{{domain}}`
-  
-2. Run the following command, it will output an export command.
-
-    `ibmcloud cs cluster-config {CLUSTER_NAME}`
-    
-3. Set the KUBECONFIG environment variable. Copy the output from the previous command and paste it in your terminal. The command output looks similar to the following example:
-   
-    `export KUBECONFIG=/Users/$USER/.bluemix/plugins/container-service/clusters/mycluster/kube-config-hou02-mycluster.yml`
-
-4. Bind the instance of App ID to your cluster.
-
-    `ibmcloud cs cluster-service-bind {CLUSTER_NAME} default {APP_ID_INSTANCE_NAME}`
-    
-5. Find your cluster's public endpoint {CLUSTER_ENDPOINT}.
-   
-   Note: If you are using the free version of kubernetes (with only 1 worker node) you can use your node's public IP instead, which you can find using:
-
-    `ibmcloud cs workers {CLUSTER_NAME}`
-
-6. Edit the kube_deployment.yml file. 
-    1. Edit the image field of the deployment section to match your image name. The name of your image should be `{REGISTRY_DOMAIN}/{REPOSITORY_NAMESPACE}/appid-node-sample:{APP_VERSION}`). 
-    2. Edit the Binding name field to match yours. It should be `binding-{APP_ID_INSTANCE_NAME}`.
-    3. Edit redirectUri's value to include your cluster's IP. The value should be `http://{CLUSTER_ENDPOINT}/ibm/cloud/appid/callback`
-    4. Optional: Change the value of metadata.namespace from default to your cluster namespace if you’re using a different namespace.
-
-7. Build your Docker image.
-   
-    `docker build -t {REGISTRY_DOMAIN}/{REPOSITORY_NAMESPACE}/appid-node-sample:{APP_VERSION} .`
-    
-8. Push the image.
-   
-    `docker push {REGISTRY_DOMAIN}/{REPOSITORY_NAMESPACE}/appid-node-sample:{APP_VERSION}`
-   
-    `kubectl apply -f kube_deployment.yml`
-
-9. Now configure the OAuth redirect URL at the App ID dashboard so it will approve redirecting to your cluster. Go to your App ID instance at [IBM Cloud console](https://cloud.ibm.com/resources) and under Manage Authentication->Authentication Settings->Add web redirect URLs add the following URL:
-
-   `https://{CLUSTER_ENDPOINT}:30000/ibm/cloud/appid/callback`
-
-10. You can see your sample running on Kubernetes in IBM Cloud.
-   
-    `open http://{CLUSTER_ENDPOINT}:30000`
-
-## Clarification
-This sample runs on one instance and uses the session to store the authorization data.
-In order to run it in production mode, use services such as Redis to store the relevant data.
-
-## See More
-#### Protecting Node.js Web Applications with IBM Cloud App ID
 https://www.youtube.com/watch?v=6roa1ZOvwtw
 
-## License
 
-Copyright (c) 2019 IBM Corporation
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-[img-ibmcloud-powered]: https://img.shields.io/badge/ibm%20cloud-powered-blue.svg
+[img-ibmcloud-powered]: https://img.shields.io/badge/IBM%20cloud-powered-blue.svg
+[url-ibmcloud-Functions]: https://www.ibm.com/cloud/functions
+[url-ibmcloud-object]: https://www.ibm.com/cloud/object-storage
+[img-cloud-functions]: https://img.shields.io/badge/IBM%20cloud-Functions-red.svg
+[img-cloud-object]: https://img.shields.io/badge/IBM%20cloud-Object_Storage-red.svg
+[img-cloud-serverless]: https://img.shields.io/badge/IBM%20cloud-Serverless-green.svg
+[img-cloud-appid]: https://img.shields.io/badge/IBM%20cloud-AppID-red.svg
+[img-cloud-cloudant]: https://img.shields.io/badge/IBM%20cloud-Cloudant-red.svg
+[url-ibmcloud-appid]: https://www.ibm.com/cloud/app-id
+[url-ibmcloud-cloudant]: https://www.ibm.com/cloud/cloudant
 [url-ibmcloud]: https://www.ibm.com/cloud/
-
-[img-node-badge]: https://img.shields.io/badge/platform-node-lightgrey.svg?style=flat
-[url-node-badge]: https://developer.node.com/index.html
-
-[img-travis-master]: https://travis-ci.org/ibm-cloud-security/app-id-sample-node.svg?branch=master
-[url-travis-master]: https://travis-ci.org/ibm-cloud-security/app-id-sample-node?branch=master
-
-[img-coveralls-master]: https://coveralls.io/repos/github/ibm-cloud-security/app-id-sample-node/badge.svg
-[url-coveralls-master]: https://coveralls.io/github/ibm-cloud-security/app-id-sample-node
-
-[img-codacy]: https://api.codacy.com/project/badge/Grade/fb042b4cb2f048968b567cde2251edcc
-[url-codacy]: https://www.codacy.com/app/ibm-cloud-security/app-id-sample-node
-
-[img-github-watchers]: https://img.shields.io/github/watchers/ibm-cloud-security/app-id-sample-node.svg?style=social&label=Watch
-[url-github-watchers]: https://github.com/ibm-cloud-security/app-id-sample-node/watchers
-[img-github-stars]: https://img.shields.io/github/stars/ibm-cloud-security/app-id-sample-node.svg?style=social&label=Star
-[url-github-stars]: https://github.com/ibm-cloud-security/app-id-sample-node/stargazers
-[img-github-forks]: https://img.shields.io/github/forks/ibm-cloud-security/app-id-sample-node.svg?style=social&label=Fork
-[url-github-forks]: https://github.com/ibm-cloud-security/app-id-sample-node/network
+[url-githubserverless]: https://github.com/ibmdevelopermx/Serverless_Cloudant
+[url-IBMCLOUD]: https://cloud.ibm.com/registration
+[url-CLI-IBMCLOUD]: https://cloud.ibm.com/docs/cli/reference/ibmcloud?topic=cloud-cli-install-ibmcloud-cli
+[url-github-join]: https://github.com/join
+[url-github-cli]: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git
+[url-githubdesktop]: https://desktop.github.com/
+[url-node]: https://nodejs.org/es/download/
